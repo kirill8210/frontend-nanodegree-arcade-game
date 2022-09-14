@@ -42,6 +42,10 @@ const avatarPlayer = [
     'images/char-princess-girl.png',
 ];
 
+const avatar = function () {
+   return avatarPlayer[Math.floor(Math.random()*avatarPlayer.length)]
+};
+
 const Player = function(x, y) {
     this.x = x;
     this.y = y;
@@ -50,9 +54,11 @@ const Player = function(x, y) {
 
 Player.prototype.update = function(){
     if (this.y < 0) {
-        this.x = playerX;
-        this.y = playerY;
-        this.sprite = avatarPlayer[Math.floor(Math.random()*avatarPlayer.length)];
+        setTimeout(() => {
+            this.x = playerX;
+            this.y = playerY;
+            this.sprite = avatar();
+        }, 50);
     }
 };
 
@@ -80,7 +86,7 @@ const allEnemies = [];
 const enemyLocation = [63, 147, 230];
 
 enemyLocation.forEach(function (locationY) {
-    const enemy = new Enemy(0, locationY, 200);
+    const enemy = new Enemy(0, locationY, 50 + Math.floor(Math.random() * 200));
     allEnemies.push(enemy);
 });
 
